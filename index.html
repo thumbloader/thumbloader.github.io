@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ThumbLoader - Free YouTube Thumbnail Downloader Tool" />
+  <meta name="keywords" content="YouTube Thumbnail Downloader Free, ThumbLoader, Download YouTube Thumbnails" />
+  <meta name="author" content="ThumbLoader" />
+  <title>ThumbLoader – Free YouTube Thumbnail Downloader</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ThumbLoader",
+    "url": "https://thumloader.github.io",
+    "description": "Free YouTube Thumbnail Downloader tool to get high quality thumbnails from video URLs.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://thumloader.github.io/?url={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <style>
+    body { font-family: 'Share Tech', sans-serif; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+
+<!-- Header with Navbar -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="#">ThumbLoader</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Title & Input -->
+<main class="container my-5">
+  <h1 class="text-center mb-3">YouTube Thumbnail Downloader Free</h1>
+  <p class="text-center text-muted mb-4">Paste a YouTube video link to get thumbnails in high quality</p>
+
+  <div class="input-group mb-4">
+    <input type="text" id="youtubeUrl" class="form-control" placeholder="Enter YouTube Video URL">
+    <button class="btn btn-primary" onclick="generateThumbnails()">Get Thumbnails</button>
+  </div>
+
+  <!-- Thumbnails Preview -->
+  <div id="preview" class="row gy-4 justify-content-center"></div>
+
+  <!-- Content.html Load Here -->
+  <section id="guide" class="mt-5">
+    <h3 class="mb-4">How to Use ThumbLoader</h3>
+    <div id="contentGuide" class="p-3 bg-white shadow-sm border rounded">Loading guide...</div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-white text-center py-4 border-top">
+  <div class="container">
+    <div class="mb-2">
+      <a href="#about" class="text-decoration-none me-3">About</a>
+      <a href="#contact" class="text-decoration-none me-3">Contact</a>
+      <a href="#privacy" class="text-decoration-none">Privacy Policy</a>
+    </div>
+    <p class="mb-1 text-muted">This tool is not affiliated with YouTube. All thumbnails belong to their respective owners.</p>
+    <p class="mb-0 text-muted">&copy; 2025 <a href="https://thumloader.github.io" class="text-decoration-none">ThumbLoader</a>. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  function extractVideoID(url) {
+    const regex = /(?:youtu\.be\/|youtube\.com\/(?:watch\\?v=|embed\/|v\/|shorts\/))([^&?/]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  }
+
+  function generateThumbnails() {
+    const input = document.getElementById("youtubeUrl").value.trim();
+    const videoID = extractVideoID(input);
+    const preview = document.getElementById("preview");
+    preview.innerHTML = "";
+
+    if (!videoID) {
+      preview.innerHTML = "<div class='col-12 text-danger text-center'>Invalid YouTube URL</div>";
+      return;
+    }
+
+    const qualities = {
+      "Default (120x90)": `https://img.youtube.com/vi/${videoID}/default.jpg`,
+      "Medium (320x180)": `https://img.youtube.com/vi/${videoID}/mqdefault.jpg`,
+      "High (480x360)": `https://img.youtube.com/vi/${videoID}/hqdefault.jpg`,
+      "Standard (640x480)": `https://img.youtube.com/vi/${videoID}/sddefault.jpg`,
+      "Max Res (1280x720)": `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`
+    };
+
+    for (const [label, url] of Object.entries(qualities)) {
+      const col = document.createElement("div");
+      col.className = "col-12 col-md-6 col-lg-4 text-center";
+
+      col.innerHTML = `
+        <div class="card p-3 border-0 shadow-sm">
+          <img src="${url}" alt="${label}" class="img-fluid rounded mb-2">
+          <h6 class="mb-2">${label}</h6>
+          <a href="${url}" download class="btn btn-success mb-2">Download</a>
+          <button class="btn btn-outline-secondary btn-sm" onclick="copyToClipboard('${url}', this)">Copy Link</button>
+        </div>
+      `;
+
+      preview.appendChild(col);
+    }
+  }
+
+  function copyToClipboard(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy Link", 1500);
+    });
+  }
+
+  // Load external content.html
+  fetch('content.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('contentGuide').innerHTML = data;
+    })
+    .catch(() => {
+      document.getElementById('contentGuide').innerText = 'Failed to load guide.';
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
