@@ -1,21 +1,21 @@
+# robots.txt for ThumbLoader
+
 User-agent: *
 Disallow: /404.html
+Disallow: /admin/
 Disallow: /private/
-Disallow: /drafts/
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.cgi$
+Disallow: /*?*
+Disallow: /*.pdf$
+Disallow: /scripts/
+Disallow: /backup/
 Allow: /
 
-# Crawl-delay for aggressive bots (optional)
-Crawl-delay: 10
-
-# Sitemap for better indexing
 Sitemap: https://thumbloader.github.io/sitemap.xml
+Host: https://thumbloader.github.io
 
-# Blocking common bad bots (optional, but effective)
-User-agent: MJ12bot
-Disallow: /
+# Allow humans.txt so visitors and bots can see info about the site creators
+Allow: /humans.txt
 
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
