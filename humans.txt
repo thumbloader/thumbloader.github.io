@@ -1,0 +1,26 @@
+/* TEAM */
+Developer: Mushaahid Raza
+Role: Full Stack Developer & Designer
+Contact: mushaahidraza@gmail.com
+Twitter: @mushaahidraza
+Location: India
+
+/* SITE */
+Website: https://thumbloader.github.io
+Last update: 2025-05-21
+Technology: HTML5, CSS3, Bootstrap 5, JavaScript (ES6)
+Purpose: Free YouTube Thumbnail Downloader Tool (Youtube Thumbnail Downloader Free)
+
+/* SECURITY */
+Note: Unauthorized copying, scraping, or reproduction of this site's content and code is strictly prohibited.
+DMCA Protection Enabled.
+
+/* THANKS */
+Special thanks to all open source projects and contributors that help build this platform.
+
+/* FEEDBACK */
+For suggestions or bug reports, contact us via contact page.
+
+/* COPYRIGHT */
+© 2025 ThumbLoader. All rights reserved.
+
