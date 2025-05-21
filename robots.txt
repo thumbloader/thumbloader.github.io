@@ -1,4 +1,21 @@
 User-agent: *
+Disallow: /404.html
+Disallow: /private/
+Disallow: /drafts/
 Allow: /
 
+# Crawl-delay for aggressive bots (optional)
+Crawl-delay: 10
+
+# Sitemap for better indexing
 Sitemap: https://thumbloader.github.io/sitemap.xml
+
+# Blocking common bad bots (optional, but effective)
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
